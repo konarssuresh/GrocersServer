@@ -1,0 +1,17 @@
+{
+  "name": "capstone-server",
+  "version": "1.0.0",
+  "description": "this contains server code for capstone project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "suresh konar",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.12",
+    "mongoose-auto-increment": "^5.0.1"
+  }
+}
