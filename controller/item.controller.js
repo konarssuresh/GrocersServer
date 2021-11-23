@@ -1,13 +1,15 @@
 let itemModel = require("../model/item.model");
 
 let addNewItem = (req, res, next) => {
-  const {itemId, ...remainingProps} = req.body;
-  itemModel.findOne({itemId}, (err, result) => {
+  console.log(req.body);
+  const {name, price, ...remainingProps} = req.body;
+  itemModel.findOne({name, price}, (err, result) => {
     if (!err) {
       if (result === null) {
         itemModel.insertMany(
           {
-            itemId,
+            name,
+            price,
             ...remainingProps,
           },
           (err) => {
@@ -38,9 +40,10 @@ let getAllItems = (req, res, next) => {
 };
 
 let updateItem = (req, res, next) => {
-  let {itemId, ...remainingProps} = req.body;
-  const id = itemId.toLowerCase();
-  itemModel.updateOne({itemId: id}, {...remainingProps}, (err) => {
+  let {_id, ...remainingProps} = req.body;
+
+  itemModel.updateOne({_id}, {...remainingProps}, (err, result) => {
+    console.log(result);
     if (!err) {
       res.send({message: "item updated successfully"});
     } else {
@@ -50,16 +53,32 @@ let updateItem = (req, res, next) => {
 };
 
 let deleteItem = (req, res, next) => {
-  let {itemId} = req.body;
-  const id = itemId.toLowerCase();
+  let {_id} = req.body;
 
-  itemModel.deleteMany({itemId: id}, (err) => {
+  itemModel.deleteMany({_id}, (err) => {
     if (!err) {
-      res.send({message: `item ${id} is deleted successfully`});
+      res.send({message: `item ${_id} is deleted successfully`});
     } else {
       next(err);
     }
   });
 };
 
-module.exports = {addNewItem, getAllItems, updateItem, deleteItem};
+let findItemById = (req, res, next) => {
+  let {_id} = req.body;
+  itemModel.findOne({_id}, (err, result) => {
+    if (!err) {
+      res.send(result);
+    } else {
+      next(err);
+    }
+  });
+};
+
+module.exports = {
+  addNewItem,
+  getAllItems,
+  updateItem,
+  deleteItem,
+  findItemById,
+};

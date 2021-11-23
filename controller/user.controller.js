@@ -53,11 +53,7 @@ let loginUser = (req, res, next) => {
 let getAllUsers = (req, res, next) => {
   userModel.find({}, (err, results) => {
     if (!err) {
-      const usersList = results.map(({userId, firstName, lastName}) => ({
-        userId,
-        name: `${firstName} ${lastName}`,
-      }));
-      res.send(usersList);
+      res.send(results);
     } else {
       next(err);
     }
@@ -68,8 +64,9 @@ let deleteUser = (req, res, next) => {
   let {userId} = req.body;
   const id = userId.toLowerCase();
 
-  userModel.deleteMany({userid: id}, (err) => {
+  userModel.findOneAndDelete({userId: id}, (err, result) => {
     if (!err) {
+      console.log(result);
       res.send({message: `user ${id} is deleted successfully`});
     }
   });
@@ -80,7 +77,7 @@ let updateUser = (req, res, next) => {
 
   userModel.updateOne({userId}, {...remainingProps}, (err, result) => {
     if (!err) {
-      res.send({mnessage: `user ${userId} updated successfully`});
+      res.send({message: `user updated successfully`});
     } else {
       next(err);
     }
