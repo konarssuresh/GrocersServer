@@ -5,7 +5,7 @@ let router = express.Router();
 
 router.post("/placeOrder", orderController.addOrder);
 
-router.get("/getOrders/:userId", orderController.getOrderByUserId);
+router.post("/getOrders", orderController.getOrderByUserId);
 
 router.delete("/cancelOrder", orderController.deleteOrder);
 

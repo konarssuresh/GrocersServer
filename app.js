@@ -14,6 +14,8 @@ let app = express();
 let userRouter = require("./router/user.router");
 let itemRouter = require("./router/item.router");
 let orderRouter = require("./router/order.router");
+let wishlistRouter = require("./router/wishlist.router");
+let cartRouter = require("./router/cart.router");
 
 app.use(express.json());
 app.use(cors());
@@ -26,5 +28,7 @@ mongoose
 app.use("/api/users", userRouter);
 app.use("/api/items", itemRouter);
 app.use("/api/orders", orderRouter);
+app.use("/api/wishlists", wishlistRouter);
+app.use("/api/carts", cartRouter);
 
 app.listen(port, () => console.log(`app running on port ${port}`));
