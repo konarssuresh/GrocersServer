@@ -1,7 +1,28 @@
 FROM node:latest
 RUN mkdir /usr/src/app
+RUN mkdir /usr/src/app/controller/
+RUN mkdir /usr/src/app/model/
+RUN mkdir /usr/src/app/router/
 WORKDIR /usr/src/app
 COPY package.json /usr/src/app/
 RUN npm install 
 COPY app.js /usr/src/app/
+COPY controller/cart.controller.js /usr/src/app/controller/
+COPY controller/item.controller.js /usr/src/app/controller/
+COPY controller/order.controller.js /usr/src/app/controller/
+COPY controller/user.controller.js  /usr/src/app/controller/
+COPY controller/wishlist.controller.js /usr/src/app/controller/
+COPY model/cart.model.js /usr/src/app/model/
+COPY model/counter.model.js /usr/src/app/model/
+COPY model/item.model.js /usr/src/app/model/
+COPY model/order.model.js /usr/src/app/model/
+COPY model/user.model.js /usr/src/app/model/
+COPY model/wishlist.model.js /usr/src/app/model/
+COPY router/cart.router.js /usr/src/app/router/
+COPY router/item.router.js /usr/src/app/router/
+COPY router/order.router.js /usr/src/app/router/
+COPY router/user.router.js /usr/src/app/router/
+COPY router/wishlist.router.js /usr/src/app/
+
+
 CMD ["node","app.js"]
