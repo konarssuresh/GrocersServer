@@ -13,5 +13,10 @@
     "express": "^4.17.1",
     "mongoose": "^6.0.12",
     "mongoose-auto-increment": "^5.0.1"
+  },
+  "devDependencies": {
+    "jasmine": "^3.10.0",
+    "jasmine-node": "^3.0.0",
+    "supertest": "^6.1.6"
   }
 }

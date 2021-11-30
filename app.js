@@ -31,4 +31,6 @@ app.use("/api/orders", orderRouter);
 app.use("/api/wishlists", wishlistRouter);
 app.use("/api/carts", cartRouter);
 
-app.listen(port, () => console.log(`app running on port ${port}`));
+let server = app.listen(port, () => console.log(`app running on port ${port}`));
+
+module.exports = server;
